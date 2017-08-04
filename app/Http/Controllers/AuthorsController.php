@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Author;
-use\Yajra\Datatables\Html\Builder;
-use\Yajra\Datatables\Datatables;
+use Yajra\Datatables\Html\Builder;
+use Yajra\Datatables\Datatables;
 
 class AuthorsController extends Controller
 {
@@ -16,19 +16,14 @@ class AuthorsController extends Controller
      */
     public function index(Request $request, Builder $htmlBuilder)
     {
-        if($request->ajax()){
-            $authors = $Author::select(['id','name']);
-            return Datatables::of($authors)
-            ->addColumn('action',function($authors){
-                return view('datatable_action',[
-                    'edit_url'=> route('authors.edit', $author->id)
-                    ]);
-            })->make(true);
+        if ($request->ajax()) {
+        $authors = Author::select(['id', 'name']);
+        return Datatables::of($authors)->make(true);
+        
         }
 
         $html = $htmlBuilder
-        ->addColumn(['data' => 'name', 'name' =>'name', 'title'=>'Nama'])
-        ->addColumn(['data' => 'action', 'name' =>'action', 'title'=>'','orderable'=>false, 'searchable'=>false]);
+        ->addColumn(['data' => 'name', 'name'=>'name', 'title'=>'Nama']);
         return view('authors.index')->with(compact('html'));
     }
 

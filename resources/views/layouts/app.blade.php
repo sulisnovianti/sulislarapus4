@@ -11,12 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/app.cs">
-    <link rel="stylesheet" type="text/css" href="/css/jquery.dataTable.css">
-    <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.min.js">
+    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
+    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/jquery.dataTables.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/dataTables.bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -41,22 +40,20 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                    
-                    @if(Auth::check())
-                    <li><a href="{{ url('home') }}">Dashboard</a></li>
-                   
-                    @endif
-                    @role('admin')
-                    <li> <a href="{{ route(authors.index) }}"> Penulis</a></li>
-                    @endrole
+                        @if (Auth::check())
+                            <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                            @role('admin')
+                             <li><a href="{{ route('authors.index') }}">Penulis</a></li>
+                            @endrole
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('login') }}">Login</a></li>
-                            <li><a href="{{ url('register') }}">Daftar</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ url('/register') }}">Daftar</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -82,14 +79,14 @@
                 </div>
             </div>
         </nav>
-@include('layouts._flash')
+        @include('layouts._flash')
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script scr="/js/jquery.dataTables.min.js"></script>
-    <script scr="/js/dataTables.boostrap.min.js"></script>
+    <script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
     @yield('scripts')
 </body>
 </html>
